@@ -19,7 +19,7 @@ let task = document.querySelector(".task")
 //     console.log(db.index)
 // }
 
-var a = 0;
+
 
 
 boton.addEventListener("click", function () {
@@ -79,16 +79,16 @@ boton.addEventListener("click", function () {
     span4.textContent = ("💰")
     span5.textContent = ("📴")
     span6.textContent = ("🏋️‍♂️")
-    span7.textContent = ("🍖")
+    span7.textContent = ("💼")
     span8.textContent = ("💻")
-    span9.textContent=  ("🧎‍♂️")
+    span9.textContent=  ("📖")
     
     
     emoji.addEventListener("click", function () {
         if (div.style.display == "none"){ div.style.display = "flex"}
         else if (div.style.display == "flex"){div.style.display = "none"}
 })
-    send.addEventListener("click", function () {
+    send.addEventListener("click", function enviar () {
         toDo.removeChild(div)
         toDo.removeChild(emoji)
         let h2 = document.createElement("h2")
@@ -105,9 +105,13 @@ boton.addEventListener("click", function () {
         borrar.setAttribute("value", "borrar")
         borrar.className = ("borrar")
         form.appendChild(borrar)
-        a = a + 1
-        localStorage.setItem(`task${a}`, toDo.innerHTML)
-        const tareas = localStorage.getItem(task)
+        if (h2.textContent == "" || h2.textContent == " "){
+            alert("Es necesario que ponga un titulo a la tarea")
+            task.removeChild(toDo)
+        }else{
+            localStorage.setItem(h2.textContent, toDo.innerHTML)
+        }
+        
 
         
         
@@ -120,9 +124,7 @@ boton.addEventListener("click", function () {
             setTimeout(function(){
                 task.removeChild(toDo)
             }, 2000)
-            a = -1
-            a = a + 1
-            localStorage.removeItem(localStorage.key(a))
+            localStorage.removeItem(h2.textContent)
         })
         
     })
@@ -140,7 +142,7 @@ boton.addEventListener("click", function () {
     
 })
 if (localStorage.key(0) != null){
-    if ( confirm("Tienes tares guardadas ¿Deseas cargarlas?")){
+    
         for (let i = 0; i < localStorage.length; i++) {
             const clave = localStorage.key(i);
             const get = localStorage.getItem(clave);
@@ -158,15 +160,10 @@ if (localStorage.key(0) != null){
                 p.style.textDecoration = "line-through";
                 h2.style.color = "#212121";
                 p.style.color = "#d3d3d3";
-                setTimeout(function () {
+                setTimeout(function() {
                     task.removeChild(toDo);
-                }, 2000);
+                }, 2000)
+                localStorage.removeItem(h2.textContent)
             })
-        }}else if (confirm){}
-    };
-    
-
-
-
-   
-    
+        
+        }}
