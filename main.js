@@ -1,5 +1,4 @@
 "use strict"
-
 const boton = document.querySelector(".boton")
 const cargar = document.querySelector(".cargar")
 let task = document.querySelector(".task")
