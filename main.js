@@ -102,8 +102,13 @@ boton.addEventListener("click", function () {
         form.removeChild(send)
         const borrar = document.createElement("input")
         borrar.setAttribute("type", "button")
-        borrar.setAttribute("value", "borrar")
+        borrar.setAttribute("value", "Hecho")
         borrar.className = ("borrar")
+        const edit = document.createElement("input")
+        edit.setAttribute("type", "button")
+        edit.setAttribute("value", "Editar")
+        edit.className = "modify"
+        form.appendChild(edit)
         form.appendChild(borrar)
         if (h2.textContent == "" || h2.textContent == " "){
             alert("Es necesario que ponga un titulo a la tarea")
@@ -111,7 +116,26 @@ boton.addEventListener("click", function () {
         }else{
             localStorage.setItem(h2.textContent, toDo.innerHTML)
         }
-        
+        //====Editar====//
+        edit.addEventListener("click", function(){
+            h2.setAttribute("contentEditable", "true")
+            p.setAttribute("contentEditable", "true")
+            const save = document.createElement("input")
+            save.setAttribute("value", "Guardar")
+            save.setAttribute("type", "button")
+            save.className = "save"
+            form.replaceChild(save,edit )
+            localStorage.removeItem(h2.textContent)
+
+            //====evento de guardar====//
+            save.addEventListener("click", function(){
+            h2.setAttribute("contentEditable", "false")
+            p.setAttribute("contentEditable", "false")
+            form.replaceChild(edit,save )
+            localStorage.setItem(h2.textContent, toDo.innerHTML)
+
+            })
+        })
 
         
         
@@ -121,6 +145,7 @@ boton.addEventListener("click", function () {
             p.style.textDecoration = "line-through"
             h2.style.color = "#212121"
             p.style.color = "#d3d3d3"
+            toDo.style.backgroundColor = "lightgreen"
             setTimeout(function(){
                 task.removeChild(toDo)
             }, 2000)
