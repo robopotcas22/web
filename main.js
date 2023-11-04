@@ -182,6 +182,7 @@ if (localStorage.key(0) != null){
                 let p = toDo.querySelector(".description");
                 h2.style.textDecoration = "line-through";
                 p.style.textDecoration = "line-through";
+                toDo.style.backgroundColor = "lightgreen"
                 h2.style.color = "#212121";
                 p.style.color = "#d3d3d3";
                 setTimeout(function() {
@@ -189,5 +190,23 @@ if (localStorage.key(0) != null){
                 }, 2000)
                 localStorage.removeItem(h2.textContent)
             })
-        
+            edit.addEventListener("click", function(){
+                h2.setAttribute("contentEditable", "true")
+                p.setAttribute("contentEditable", "true")
+                const save = document.createElement("input")
+                save.setAttribute("value", "Guardar")
+                save.setAttribute("type", "button")
+                save.className = "save"
+                form.replaceChild(save,edit )
+                localStorage.removeItem(h2.textContent)
+    
+                //====evento de guardar====//
+                save.addEventListener("click", function(){
+                h2.setAttribute("contentEditable", "false")
+                p.setAttribute("contentEditable", "false")
+                form.replaceChild(edit,save )
+                localStorage.setItem(h2.textContent, toDo.innerHTML)
+    
+                })
+            })
         }}
