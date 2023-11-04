@@ -48,6 +48,7 @@ boton.addEventListener("click", function () {
     form.appendChild(send)
     toDo.appendChild(emoji)
     toDo.className = "toDo"
+    form.classList.add("form")
     task.appendChild(toDo)
     //emojis
     let div = document.createElement("div")
@@ -190,7 +191,11 @@ if (localStorage.key(0) != null){
                 }, 2000)
                 localStorage.removeItem(h2.textContent)
             })
+            const edit = document.querySelector(".modify")
+            const form = document.querySelector(".form")
             edit.addEventListener("click", function(){
+                let h2 = toDo.querySelector(".title");
+                let p = toDo.querySelector(".description");
                 h2.setAttribute("contentEditable", "true")
                 p.setAttribute("contentEditable", "true")
                 const save = document.createElement("input")
