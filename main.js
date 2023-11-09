@@ -3,20 +3,7 @@ const boton = document.querySelector(".boton")
 const cargar = document.querySelector(".cargar")
 let task = document.querySelector(".task")
 
-// let request = indexedDB.open("==Almacen de Tareas==", 1)
 
-// request.onupgradeneeded = function () {
-//         const db = request.result;
-//         db.createObjectStore("=Tareas=", {autoIncrement : true})
-//         }
-
-// const añadir = objeto =>{
-//     const db = request.result
-//     const editdb = db.transaction("=Tareas=", "readwrite")
-//     const objstore = editdb.objectStore("=Tareas=")
-//     objstore.add(objeto)
-//     console.log(db.index)
-// }
 
 
 
@@ -120,6 +107,7 @@ boton.addEventListener("click", function () {
         edit.addEventListener("click", function(){
             h2.setAttribute("contentEditable", "true")
             p.setAttribute("contentEditable", "true")
+            h2.setAttribute("spellCheck", "false")
             const save = document.createElement("input")
             save.setAttribute("value", "Guardar")
             save.setAttribute("type", "button")
@@ -191,8 +179,9 @@ if (localStorage.key(0) != null){
                 }, 2000)
                 localStorage.removeItem(h2.textContent)
             })
-            const edit = document.querySelector(".modify")
-            const form = document.querySelector(".form")
+            const form = toDo.querySelector(".form")
+            const edit = form.querySelector(".modify")
+            
             edit.addEventListener("click", function(){
                 let h2 = toDo.querySelector(".title");
                 let p = toDo.querySelector(".description");
@@ -202,11 +191,12 @@ if (localStorage.key(0) != null){
                 save.setAttribute("value", "Guardar")
                 save.setAttribute("type", "button")
                 save.className = "save"
-                form.replaceChild(save,edit )
-                localStorage.removeItem(h2.textContent)
+                form.replaceChild(save,edit)
+                const value = h2.textContent
     
                 //====evento de guardar====//
                 save.addEventListener("click", function(){
+                localStorage.removeItem(value)
                 h2.setAttribute("contentEditable", "false")
                 p.setAttribute("contentEditable", "false")
                 form.replaceChild(edit,save )

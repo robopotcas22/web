@@ -39,6 +39,8 @@ h2{
     
 }
 .task{
+    display: flex;
+    flex-direction: column-reverse;
     border-collapse: collapse;
     border: 0px;
     padding-inline-start:0px ;
